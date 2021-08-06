@@ -70,4 +70,20 @@ export default {
         }
     }
 }
+
+@media (max-width:500px) {
+    .statistics{
+        gap: 12px;
+        .istatic{
+            flex-basis: 48%;
+            padding: 20px 16px;
+            gap: 18px;  
+            flex-direction: column;  
+            &__details{
+                align-items: center;
+                text-align: center;
+            }  
+        }
+    }
+}
 </style>

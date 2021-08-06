@@ -173,6 +173,13 @@ export default {
         &__email, &__date, &__time, &__doctor, &__condition{
             display: none;
         }
+        &__row{
+            justify-content: space-between;
+
+        }
+        &__name{
+            flex-basis: 50%;
+        }
     }
 }
 </style>

@@ -54,4 +54,10 @@ export default {
         flex-wrap: wrap;
     }
 }
+
+@media (max-width:500px) {
+    .navigation{
+        display: none !important;
+    }
+}
 </style>

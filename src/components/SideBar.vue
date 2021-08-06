@@ -157,6 +157,8 @@ export default {
 @media(max-width:996px){
     .sidebar{
         left: -100%;
+        z-index: 2;
+        width: 80vw;
     }
 }
 </style>
