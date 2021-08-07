@@ -19,8 +19,17 @@
                     <svg @click="removeItem(item)" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M4.00952 14.3248C4.02552 14.7024 4.33592 15 4.71352 15H11.2911C11.6687 15 11.9807 14.7024 11.9951 14.3248L12.4655 4.408H3.53912L4.00952 14.3248ZM9.48952 6.872C9.48952 6.7136 9.61752 6.5856 9.77592 6.5856H10.2335C10.3919 6.5856 10.5199 6.7152 10.5199 6.872V12.5376C10.5199 12.696 10.3903 12.824 10.2335 12.824H9.77592C9.61752 12.824 9.48952 12.696 9.48952 12.5376V6.872ZM7.48792 6.872C7.48792 6.7136 7.61592 6.5856 7.77432 6.5856H8.23192C8.39032 6.5856 8.51832 6.7152 8.51832 6.872V12.5376C8.51832 12.696 8.39032 12.824 8.23192 12.824H7.77432C7.61592 12.824 7.48792 12.696 7.48792 12.5376V6.872ZM5.48472 6.872C5.48472 6.7136 5.61272 6.5856 5.76952 6.5856H6.22712C6.38552 6.5856 6.51352 6.7152 6.51352 6.872V12.5376C6.51352 12.696 6.38392 12.824 6.22712 12.824H5.76952C5.61112 12.824 5.48472 12.696 5.48472 12.5376V6.872ZM12.7775 1.7216H9.74392V1.1472C9.74392 1.0656 9.67832 1 9.59672 1H6.40952C6.32792 1 6.26232 1.0656 6.26232 1.1472V1.7216H3.22712C2.98392 1.7216 2.78552 1.9184 2.78552 2.1632V3.552H13.2191V2.1632C13.2191 1.92 13.0223 1.7216 12.7775 1.7216Z" fill="#FF6760"/>
                     </svg>
+                    <!-- <button @click="changeItem(item)">Change</button> -->
+                    <div :class="isActive ? 'mActive' : ''" class="modalBox">
+                        <div class="modal">
+                            <input type="text" v-model="newName" placeholder="Name">
+                            <input type="email" v-model="newEmail" placeholder="Email">
+                            <input type="date" v-model="newDate">
+                            <button @click="changeItem(item)">Change</button>
+                        </div>
+                    </div>
                 </span>
-            </div>
+            </div>   
         </div>
     </div>
 </template>
@@ -32,7 +41,7 @@ export default {
         return{
             clients : [
                 {
-                    id : 0,
+                    id: 0,
                     name : "Name",
                     email :"Email",
                     date : "Date",
@@ -41,7 +50,7 @@ export default {
                     condition : "Conditions",
                 },
                 {
-                    id : 1,
+                    id: 1,
                     img : "https://picsum.photos/100/100",
                     name : "Leslie Alexander",
                     email :"lesie.alexander@example.com",
@@ -51,7 +60,7 @@ export default {
                     condition : "Mumps Stage II",
                 },
                 {
-                    id : 2,
+                    id: 2,
                     img : "https://picsum.photos/100/101",
                     name : "Ronald Richards",
                     email :"ronald.richards@example.com",
@@ -61,7 +70,7 @@ export default {
                     condition : "Depression",
                 },
                 {
-                    id : 3,
+                    id: 3,
                     img : "https://picsum.photos/100/102",
                     name : "Jane Cooper",
                     email :"jane.cooper@example.com",
@@ -71,7 +80,7 @@ export default {
                     condition : "Arthritis",
                 },
                 {
-                    id : 4,
+                    id: 4,
                     img : "https://picsum.photos/100/103",
                     name : "Robert Fox",
                     email :"robert.fox@gmail.com",
@@ -81,7 +90,7 @@ export default {
                     condition : "Fracture",
                 },
                 {
-                    id : 5,
+                    id: 5,
                     img : "https://picsum.photos/100/104",
                     name : "Jenny Wilson",
                     email :"jenny.wilson@example.com",
@@ -90,15 +99,35 @@ export default {
                     doctor : "Dr. Esther Howard",
                     condition : "Depression",
                 }
-            ]
+            ],
+            newName: '',
+            newEmail: '',
+            newDate: new Date(),
+            isActive : false
         }
     },
     methods : {
         removeItem(d){
+            console.log(d)
             var id = d.id
             let index = this.clients.findIndex(rank => rank.id === id);
             this.clients.splice(index, 1)
         },
+        openModal(){
+            this.isActive = true
+            //document.body.style.overflowY = "hidden"
+        },
+        changeItem(a){
+            console.log(a)
+            this.isActive = false
+            // var id = d.id
+            // let index = this.clients.filter(rank => rank.id === id);
+            // console.log(index)
+            // this.clients[index].name = this.newName
+            // this.clients[index].email = this.newEmail
+            // this.clients[index].date = this.newDate
+            //document.body.style.overflowY = "initial"
+        }
     }
 }
 </script>
@@ -166,6 +195,51 @@ export default {
         object-fit: cover;
         border-radius: 50%;
     }
+}
+.modal{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    border: 1px solid #558EFF;
+    background: #c9dbff;
+    transform: translate(-50%, -50%);
+    input{
+        width: 340px;
+        height: 36px;
+        padding: 20px;
+        border-radius: 4px;
+        border: none;
+        outline: none;
+    }
+    button{
+        padding: 8px 48px;
+        border: none;
+        outline: none;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 8px;
+        color: white;
+        background: #558EFF;
+        text-transform: uppercase;
+    }
+}
+.modalBox{
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #1a1c1e3d;
+}
+.mActive{
+    display: flex;
 }
 
 @media (max-width:776px) {

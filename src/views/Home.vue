@@ -32,7 +32,7 @@ export default {
     Statistics,
     Activity,
     AreaChart,
-    Navigation 
+    Navigation, 
   },
   data(){
       return{
